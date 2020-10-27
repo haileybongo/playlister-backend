@@ -10,8 +10,9 @@ class Api::PlaylistsController < ApplicationController
         if playlist.save
             render json: PlaylistSerializer.new(playlist)
         else
-            render json: (error: playlist.save.full_error_messages)
+            render json: "Error saving playlist"
     end
+end
 
     def show
         playlist = Playlist.find(params[:id])

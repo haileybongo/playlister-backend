@@ -15,7 +15,7 @@ class Api::SongsController < ApplicationController
                     render json: SongSerializer.new(song)
                     song.playlists << (playlist)
                 else
-                    render json: (error: song.save.full_error_messages)
+                    render json:  "Error saving song"
                 end
             end
     end
@@ -28,4 +28,4 @@ class Api::SongsController < ApplicationController
 
     end
 
-
+ 
