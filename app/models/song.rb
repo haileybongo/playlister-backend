@@ -1,5 +1,6 @@
 class Song < ApplicationRecord
-    has_and_belongs_to_many :playlists
+    has_many :playlist_songs
+    has_many :playlists, :through => :playlist_songs
     validates :song_name, :song_link, presence: true
 end
  
