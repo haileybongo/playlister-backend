@@ -6,9 +6,10 @@ class Api::PlaylistsController < ApplicationController
     end
 
     def create
-        playlist = playlist.create(playlist_params)
+        playlist = Playlist.create(playlist_params)
+        playlists = Playlist.all 
         if playlist.save
-            render json: PlaylistSerializer.new(playlist)
+            render json: PlaylistSerializer.new(playlists)
         else
             render json: "Error saving playlist"
     end

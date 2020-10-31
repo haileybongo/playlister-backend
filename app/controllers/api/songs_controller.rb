@@ -5,15 +5,18 @@ class Api::SongsController < ApplicationController
     end
 
     def create
-        findSong = Song.all.findBy(spotifyId: params[:spotifyId])
+        binding.pry
+        findSong = Song.find_by(spotify_id: params[:spotify_id])
         playlist = Playlist.all.find(params[:playlist_id])
          if findSong
             findSong.playlists<< (playlist)
          else 
-            song = song.create(song_params)
+            song = Song.create(song_params)
                 if song.save
-                    render json: SongSerializer.new(song)
                     song.playlists << (playlist)
+                    playlists = Playlist.all
+                    binding.pry
+                    render json: PlaylistSerializer.new(playlists)
                 else
                     render json:  "Error saving song"
                 end
