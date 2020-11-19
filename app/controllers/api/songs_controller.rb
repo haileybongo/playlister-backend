@@ -32,7 +32,6 @@ class Api::SongsController < ApplicationController
        
         song = Song.find(params[:id])
         playlist = Playlist.find(params[:playlist_id])
-        binding.pry
         playlist.songs.delete(song)
         if song.playlists = []
             song.destroy
