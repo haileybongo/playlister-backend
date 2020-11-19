@@ -1,4 +1,5 @@
 class Api::SongsController < ApplicationController
+
     def index
         songs = Song.all 
         render json: SongSerializer.new(songs)
@@ -19,6 +20,25 @@ class Api::SongsController < ApplicationController
                     render json:  "Error saving song"
                 end
             end
+    end
+
+    def show
+        
+        song = Song.find(params[:id])
+        render json: SongSerializer.new(song)
+    end
+
+    def destroy
+       
+        song = Song.find(params[:id])
+        playlist = Playlist.find(params[:playlist_id])
+        binding.pry
+        playlist.songs.delete(song)
+        if song.playlists = []
+            song.destroy
+        end
+        playlists = Playlist.all
+        render json: PlaylistSerializer.new(playlists)
     end
 
     private 
